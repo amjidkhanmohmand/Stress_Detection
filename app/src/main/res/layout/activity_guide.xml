@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".guide">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/stressrelief"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        />
+
+    <me.biubiubiu.justifytext.library.JustifyTextView
+        android:id="@+id/texView"
+        android:layout_marginTop="225dp"
+        android:text="To make room for the Layout Editor, hide the Project window. To do so, select View > Tool Windows > Project, or just click Project on the left side of the Android Studio screen.
+If your editor shows the XML source, click the Design tab at the top right of the window.
+Click  (Select Design Surface) and select Blueprint.
+Click  (View Options) in the Layout Editor toolbar and make sure that Show All Constraints is checked.
+Make sure Autoconnect is off. A tooltip in the toolbar displays  (Enable Autoconnection to Parent) when Autoconnect is off.
+Click  (Default Margins) in the toolbar and select 16. If needed, you can adjust the margins for each"
+        android:textSize="15sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+
+    <!--    <TextView-->
+<!--        android:id="@+id/textView4"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:textSize="18sp"-->
+<!--        android:text=""-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--         />-->
+
+<!--    Acha wala ya ha -->
+<!--    <TextView-->
+<!--        android:layout_marginTop="70dp"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="160dp"-->
+<!--        android:ems="10"-->
+<!--        android:gravity="left|top"-->
+<!--        android:hint="In the Project window, open app > res > layout > activity_main.xml.-->
+<!--To make room for the Layout Editor, hide the Project window. To do so, select View > Tool Windows > Project, or just click Project on the left side of the Android Studio screen.-->
+<!--If your editor shows the XML source, click the Design tab at the top right of the window.-->
+<!--Click  (Select Design Surface) and select Blueprint.-->
+<!--Click  (View Options) in the Layout Editor toolbar and make sure that Show All Constraints is checked.-->
+<!--Make sure Autoconnect is off. A tooltip in the toolbar displays  (Enable Autoconnection to Parent) when Autoconnect is off.-->
+<!--Click  (Default Margins) in the toolbar and select 16. If needed, you can adjust the margins for each"-->
+<!--        android:inputType="textMultiLine"-->
+<!--        android:textSize="15sp">-->
+<!--        <requestFocus />-->
+<!--    </TextView>-->
+
+
+</RelativeLayout>

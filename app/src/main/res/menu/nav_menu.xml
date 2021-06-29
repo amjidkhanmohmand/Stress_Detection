@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/home"
+            android:title="Home"
+            android:iconTint="@color/black2"
+            android:icon="@drawable/ic_home"/>
+        <item
+            android:id="@+id/privacy"
+            android:title="Privacy Policy"
+            android:iconTint="@color/black2"
+            android:icon="@drawable/privacy_ic"/>
+    </group>
+
+
+    <item
+        android:id="@+id/git"
+        android:title="About Us">
+        <menu>
+            <item
+                android:id="@+id/rate"
+                android:title="Rate Us"
+                android:iconTint="@color/black2"
+                android:icon="@drawable/rate_ic"/>
+
+            <item
+                android:id="@+id/aboutUs"
+                android:title="About"
+                android:iconTint="@color/black2"
+                android:icon="@drawable/info"
+                />
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/logOut"
+        android:title="Log out">
+        <menu>
+            <item
+                android:id="@+id/logout"
+                android:title="Log Out"
+                android:iconTint="@color/black2"
+                android:icon="@drawable/ic_baseline_login_24"
+                />
+
+        </menu>
+    </item>
+
+
+
+
+
+</menu>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/orangeRed"
+    tools:context=".activityScreens.SignUpScreen">
+
+    <LinearLayout
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="15dp"
+        android:gravity="center"
+        android:layout_marginTop="50dp"
+
+        android:background="@color/black2">
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_gravity="center"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Create Account"
+                    android:textSize="35sp"
+                    android:layout_marginTop="40dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17dp"
+                    android:text="Register Yourself"
+                    android:layout_marginBottom="40dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    />
+
+                <EditText
+                    android:id="@+id/fullName"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/field_border"
+                    android:hint="Full Name"
+                    android:textSize="15dp"
+                    android:padding="10dp"
+                    android:layout_marginBottom="20sp"
+                    android:drawableEnd="@drawable/person"
+                    android:drawablePadding="5dp"
+                    android:cursorVisible="false"
+                    />
+
+
+                <EditText
+                    android:id="@+id/userName"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/field_border"
+                    android:hint="Email"
+                    android:textSize="15dp"
+                    android:padding="10dp"
+                    android:layout_marginBottom="20sp"
+                    android:drawableEnd="@drawable/ic_baseline_email_24"
+                    android:drawablePadding="5dp"
+                    android:cursorVisible="false"
+                    />
+
+                <EditText
+                    android:id="@+id/password"
+
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/field_border"
+                    android:hint="Password"
+                    android:textSize="15dp"
+                    android:padding="10dp"
+                    android:layout_marginBottom="25sp"
+                    android:inputType="textPassword"
+                    android:drawableEnd="@drawable/lock"
+                    android:drawablePadding="5dp"
+                    android:cursorVisible="false"
+                    android:layout_gravity="center_horizontal"/>
+
+                <EditText
+                    android:id="@+id/cnic"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/field_border"
+                    android:hint="CNIC"
+                    android:textSize="15dp"
+                    android:padding="10dp"
+                    android:layout_marginBottom="20sp"
+                    android:drawableEnd="@drawable/ic_baseline_perm_identity_24"
+                    android:drawablePadding="5dp"
+                    android:cursorVisible="false"
+                    />
+                <EditText
+                    android:id="@+id/DOB"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/field_border"
+                    android:hint="Date Of Birth"
+                    android:textSize="15dp"
+                    android:padding="10dp"
+                    android:layout_marginBottom="20sp"
+                    android:drawableEnd="@drawable/calendar"
+                    android:drawablePadding="5dp"
+                    android:cursorVisible="false"
+                    />
+
+
+                <Button
+                    android:id="@+id/sign"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="50dp"
+                    android:text="Register"
+                    android:background="@drawable/button_radius"
+                    app:backgroundTint="@color/orange" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="50dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Already have an account? "
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:textSize="13sp"
+            android:textColor="@color/black"
+            android:onClick="signIn"
+            tools:ignore="OnClick" />
+    </LinearLayout>
+
+</LinearLayout>
