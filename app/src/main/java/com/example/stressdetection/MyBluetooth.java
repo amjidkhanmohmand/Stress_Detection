@@ -158,30 +158,37 @@ public class MyBluetooth  extends Activity implements View.OnClickListener {
 //            Log.d("amjad", "GetSensorData: Inside Stream"+b1);
             for (int i=0;i<16800;i++) {
 
+                if (i>5) {
 //                byte[] rawBytes = new byte[3];
-                Log.d("amjad", "GetSensorData: "+"This is a test");
+                    Log.d("amjad", "GetSensorData: "+"This is a test");
 //                inputStream.read(rawBytes);
 //                String string = new String(rawBytes, "UTF-8");
-                byte b = (byte) inputStream.read();
-                y[x]=(char)b;
-                x++;
+                    byte b = (byte) inputStream.read();
+                    y[x]=(char)b;
+                    x++;
 
-                if(x>3)
-                {
-                    x=0;
-                    Log.d("CheckBT", "CheckBT: "+count+":\t" +Character.getNumericValue(y[0])+""+Character.getNumericValue(y[1])+""+Character.getNumericValue(y[2]));
-                    count++;
-                    String s=""+Character.getNumericValue(y[0])+""+Character.getNumericValue(y[1])+""+Character.getNumericValue(y[2])+""+Character.getNumericValue(y[3]);
+                    if(x>3)
+                    {
+                        x=0;
+//                        Log.d("CheckBT", "CheckBT: "+count+":\t" +Character.getNumericValue(y[0])+"."+Character.getNumericValue(y[2])+""+Character.getNumericValue(y[3]));
+                        count++;
+                        String s=""+Character.getNumericValue(y[0])+""+""+Character.getNumericValue(y[1])+""+Character.getNumericValue(y[2]);
+
+                        float val=Float.valueOf(s);
+                        val=val/1024;
+                        s=""+val;
+                        Log.d("ali", "GetSensorData: "+val);
 
 
+                        data.add(s);
 
-                    data.add(s);
+                    }
+                    char test=(char)b;
 
+                    //Log.d("CheckBT", "CheckBT: "+Character.getNumericValue(test));
+                    //System.out.println((char) b);
+                } else {
                 }
-                char test=(char)b;
-
-                //Log.d("CheckBT", "CheckBT: "+Character.getNumericValue(test));
-                //System.out.println((char) b);
 
             }
 
