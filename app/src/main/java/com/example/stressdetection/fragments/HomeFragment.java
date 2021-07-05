@@ -1,17 +1,23 @@
 package com.example.stressdetection.fragments;
 
+import android.Manifest;
 import android.app.Dialog;
+import android.app.PendingIntent;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -32,6 +38,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.stressdetection.AdapterBluet;
+import com.example.stressdetection.CustomDialogs.CustomDialog;
 import com.example.stressdetection.LinkToLocal;
 import com.example.stressdetection.MyBluetooth;
 import com.example.stressdetection.guide;
@@ -50,6 +57,10 @@ import java.util.UUID;
 public class HomeFragment extends  Fragment implements View.OnClickListener {
    private View root;
     public CardView guide,record, prevrecord, summary;
+
+    private static final int SEND_SMS_PERMISSION_REQUEST_CODE = 1002;
+    public static final String SENT_SMS_ACTION_NAME = "SMS_SENT";
+    public static final String DELIVERED_SMS_ACTION_NAME = "SMS_DELIVERED";
 
     int BT_flag=2;
 
@@ -84,6 +95,14 @@ public class HomeFragment extends  Fragment implements View.OnClickListener {
         record.setOnClickListener(this);
         prevrecord.setOnClickListener(this);
         summary.setOnClickListener(this);
+
+        if (!checkPermission(Manifest.permission.SEND_SMS))
+        {
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.SEND_SMS},
+                    SEND_SMS_PERMISSION_REQUEST_CODE);
+        }
+
 
         instance=this;
         return root;
@@ -128,31 +147,34 @@ public class HomeFragment extends  Fragment implements View.OnClickListener {
 
             ArrayList<String> data=new ArrayList<String>();
 
-            data=blue_tooth.GetSensorData();
 
 
+            if (CustomDialog.ShowWait(getActivity())) {
+                data=blue_tooth.GetSensorData(getActivity());
 
-            if (data.size()>0)
-            {
-                //fetal_ecg.graphView.setVisibility(View.VISIBLE);
 
-                String str=data.get(0);
-                for (int i=1;i<data.size();i++)
+                if (data.size()>0)
                 {
-                    str+=","+data.get(i);
+                    //fetal_ecg.graphView.setVisibility(View.VISIBLE);
+
+                    String str=data.get(0);
+                    for (int i=1;i<data.size();i++)
+                    {
+                        str+=","+data.get(i);
+                    }
+
+                    sendToServer(str);
+    //                txt_results.setText(str);
+                    Log.d("awais", "setBtcode: "+str);
+
+    //                        userDisplay.tab1.dialogwait.dismiss();
+    //                        userDisplay.tab1.sendDataToServer(str);
+                    //fetal_ecg.setMyGraph(data);
+
                 }
-
-                sendToServer(str);
-//                txt_results.setText(str);
-                Log.d("awais", "setBtcode: "+str);
-
-//                        userDisplay.tab1.dialogwait.dismiss();
-//                        userDisplay.tab1.sendDataToServer(str);
-                //fetal_ecg.setMyGraph(data);
-
-            }
-            else {
-//                        userDisplay.tab1.dialogwait.dismiss();
+                else {
+    //                        userDisplay.tab1.dialogwait.dismiss();
+                }
             }
 
 
@@ -364,7 +386,11 @@ public class HomeFragment extends  Fragment implements View.OnClickListener {
                     @Override
                     public void onResponse(String response) {
 
+                        response=response.replace("\n", "").replace("\r", "");
                         Toast.makeText(getActivity(), ""+response, Toast.LENGTH_SHORT).show();
+
+                        sendmessage1("03405874431","Stress Detected");
+
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -397,5 +423,66 @@ public class HomeFragment extends  Fragment implements View.OnClickListener {
         requestQueue.add(stringRequest);
 
     }
+
+
+    private boolean checkPermission(String sendSms) {
+
+        int checkpermission= ContextCompat.checkSelfPermission(getActivity(),sendSms);
+        // stopFlag=false;
+        //isDialog=false;
+        return checkpermission== PackageManager.PERMISSION_GRANTED;
+    }
+
+
+
+    private void sendMessage(final String number,final String mesg)
+    {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (checkPermission(Manifest.permission.SEND_SMS))
+                {
+                    try {
+                        PendingIntent sentPI = PendingIntent.getBroadcast(getActivity(), 0, new Intent(SENT_SMS_ACTION_NAME), 0);
+                        PendingIntent deliveredPI = PendingIntent.getBroadcast(getActivity(), 0, new Intent(DELIVERED_SMS_ACTION_NAME), 0);
+
+
+                        android.telephony.SmsManager sms=android.telephony.SmsManager.getDefault();
+                        ArrayList<String> parts = sms.divideMessage(mesg);
+
+                        ArrayList<PendingIntent> sendList = new ArrayList<>();
+                        sendList.add(sentPI);
+
+                        ArrayList<PendingIntent> deliverList = new ArrayList<>();
+                        deliverList.add(deliveredPI);
+
+                        sms.sendMultipartTextMessage(number, null,parts, sendList, deliverList);
+                        //Toast.makeText(MainActivity.this, ""+number, Toast.LENGTH_SHORT).show();
+
+                        Toast.makeText(getActivity(), "Message sent!", Toast.LENGTH_SHORT).show();
+                    }catch (Exception e)
+                    {
+                        Toast.makeText(getActivity(),"Message Not Sent!",Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+                else
+                {
+
+                    ActivityCompat.requestPermissions(getActivity(),
+                            new String[]{Manifest.permission.SEND_SMS},
+                            SEND_SMS_PERMISSION_REQUEST_CODE);
+                }
+            }
+        });
+    }
+
+
+    private void sendmessage1(String number,String message)
+    {
+        SmsManager smsManager = SmsManager.getDefault();
+        smsManager.sendTextMessage(number, null, message, null, null);
+    }
+
 
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="60dp"
+    android:layout_height="60dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="30dp"
+    app:cardElevation="6dp"
+    app:cardBackgroundColor="@color/white"
+    >
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/animation_view"
+        app:lottie_rawRes="@raw/loading_anim"
+        app:lottie_autoPlay="true"
+        android:layout_gravity="center"
+        app:lottie_loop="true"/>
+
+
+</com.google.android.material.card.MaterialCardView>

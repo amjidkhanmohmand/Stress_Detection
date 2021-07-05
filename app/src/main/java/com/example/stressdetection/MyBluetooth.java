@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.stressdetection.CustomDialogs.CustomDialog;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -131,8 +133,9 @@ public class MyBluetooth  extends Activity implements View.OnClickListener {
     }
 
 
-    public ArrayList<String> GetSensorData()
+    public ArrayList<String> GetSensorData(Context context)
     {
+
         ArrayList<String> data=new ArrayList<String>();
         try {
             final String s="f";
@@ -141,6 +144,7 @@ public class MyBluetooth  extends Activity implements View.OnClickListener {
             Log.d("amjad", "GetSensorData: "+"Hello");
 
         } catch (IOException e) {
+            CustomDialog.HideWaitAnim();
             e.printStackTrace();
             Log.d("amjad", "GetSensorData: "+e.getMessage());
         }
@@ -152,11 +156,11 @@ public class MyBluetooth  extends Activity implements View.OnClickListener {
             inputStream.skip(inputStream.available());
             int x=0;
             int count=1;
-            char[] y=new char[4];
+            char[] y=new char[3];
 
 //            byte b1 = (byte) inputStream.read();
 //            Log.d("amjad", "GetSensorData: Inside Stream"+b1);
-            for (int i=0;i<16800;i++) {
+            for (int i=0;i<12600;i++) {
 
                 if (i>5) {
 //                byte[] rawBytes = new byte[3];
@@ -167,7 +171,7 @@ public class MyBluetooth  extends Activity implements View.OnClickListener {
                     y[x]=(char)b;
                     x++;
 
-                    if(x>3)
+                    if(x>2)
                     {
                         x=0;
 //                        Log.d("CheckBT", "CheckBT: "+count+":\t" +Character.getNumericValue(y[0])+"."+Character.getNumericValue(y[2])+""+Character.getNumericValue(y[3]));
@@ -191,10 +195,13 @@ public class MyBluetooth  extends Activity implements View.OnClickListener {
                 }
 
             }
+            CustomDialog.HideWaitAnim();
 
         } catch (IOException e) {
+            CustomDialog.HideWaitAnim();
             e.printStackTrace();
         }
+
         return data;
 
 
