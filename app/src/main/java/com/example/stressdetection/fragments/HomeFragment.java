@@ -388,8 +388,16 @@ public class HomeFragment extends  Fragment implements View.OnClickListener {
 
                         response=response.replace("\n", "").replace("\r", "");
                         Toast.makeText(getActivity(), ""+response, Toast.LENGTH_SHORT).show();
+                        if(response.equals("1"))
+                        {
+                            sendmessage1("03405874431","Stress Detected");
+                        }
+                        else
+                        {
+                            sendmessage1("03405874431","No Stress Detected");
+                        }
 
-                        sendmessage1("03405874431","Stress Detected");
+
 
                     }
                 }, new Response.ErrorListener() {
