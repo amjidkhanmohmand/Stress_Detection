@@ -176,7 +176,26 @@ public class MyBluetooth  extends Activity implements View.OnClickListener {
                         x=0;
 //                        Log.d("CheckBT", "CheckBT: "+count+":\t" +Character.getNumericValue(y[0])+"."+Character.getNumericValue(y[2])+""+Character.getNumericValue(y[3]));
                         count++;
+                        int val1=Character.getNumericValue(y[0]);
+                        int val2=Character.getNumericValue(y[1]);
+                        int val3=Character.getNumericValue(y[2]);
+
+                        if (val1<0)
+                        {
+                            val1*=-1;
+                        }
+                        if (val2<0)
+                        {
+                            val2*=-1;
+                        }
+                        if (val3<0)
+                        {
+                            val3*=-1;
+                        }
+
                         String s=""+Character.getNumericValue(y[0])+""+""+Character.getNumericValue(y[1])+""+Character.getNumericValue(y[2]);
+                        s=""+val1+""+val2+""+val3;
+
 
                         float val=Float.valueOf(s);
                         val=val/1024;
